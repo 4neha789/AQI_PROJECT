@@ -1,6 +1,7 @@
-# Virtual environment
+# Virtual environments
 venv/
-.env
+Venv/
+.env/
 
 # Python cache
 __pycache__/
@@ -8,13 +9,3 @@ __pycache__/
 
 # Jupyter
 .ipynb_checkpoints/
-
-# OS files
-.DS_Store
-Thumbs.db
-
-# Logs
-*.log
-
-# Models (optional – agar chaho)
-models/*.pkl
