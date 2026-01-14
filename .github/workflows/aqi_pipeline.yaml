@@ -25,7 +25,9 @@ jobs:
         run: |
           pip install -r requirements.txt
 
+      # 🔒 TEMPORARILY DISABLED (Kafka dependency issue on GitHub runner)
       - name: Run feature pipeline
+        if: false
         env:
           HOPSWORKS_API_KEY: ${{ secrets.HOPSWORKS_API_KEY }}
         run: |
