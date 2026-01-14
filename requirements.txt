@@ -1,0 +1,13 @@
+hopsworks
+pandas
+numpy
+requests
+scikit-learn
+xgboost
+tensorflow
+shap
+streamlit
+fastapi
+uvicorn
+pyyaml
+matplotlib

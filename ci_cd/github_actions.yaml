@@ -1,0 +1,48 @@
+name: AQI CI/CD Pipeline
+
+on:
+  push:
+    branches: [ "main" ]
+  schedule:
+    - cron: "0 0 * * *"   # daily run
+
+jobs:
+  aqi_pipeline:
+    runs-on: ubuntu-latest
+
+    env:
+      HOPSWORKS_API_KEY: ${{ secrets.HOPSWORKS_API_KEY }}
+
+    steps:
+    - name: 📥 Checkout code
+      uses: actions/checkout@v3
+
+    - name: 🐍 Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: "3.10"
+
+    - name: 📦 Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - name: 🔐 Test Hopsworks login
+      run: |
+        python test_hopsworks_login.py
+
+    - name: 🔧 Feature Engineering
+      run: |
+        python feature_pipeline/feature_engineering.py
+
+    - name: 🧠 Model Evaluation
+      run: |
+        python training_pipeline/evaluate.py
+
+    - name: 📦 Model Registration
+      run: |
+        python training_pipeline/register_model.py
+
+    - name: 🔮 AQI Prediction
+      run: |
+        python prediction_pipeline/predict_aqi.py
